@@ -31,7 +31,7 @@ class KBootDirent(AtariDosDirent):
         pass
 
     def process_raw_sector(self, image, raw):
-        num_bytes = np.alen(raw)
+        num_bytes = np.size(raw)
         return raw[0:num_bytes], num_bytes
 
 
@@ -109,7 +109,7 @@ def add_xexboot_header(bytes, bootcode=None, title=b"DEMO", author=b"an atari us
         # assume that the user supplied everything desired in their own code!
         title = ""
         author = ""
-    bootsize = np.alen(bootcode)
+    bootsize = np.size(bootcode)
     v = bootcode[9:11].view(dtype="<u2")
     v[0] = xex_size
 

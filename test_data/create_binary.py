@@ -15,8 +15,8 @@ def create_binary(filename, num, outfile, options):
     root, _ = outfile.split(".")
     prefix = ("%s        " % root)[0:8]
     a = np.fromstring(prefix, dtype=np.uint8)
-    b = np.tile(a, (num / np.alen(a)) + 1)[0:num]
-    b[7::8] = np.arange(np.alen(b) / 8, dtype=np.uint8)
+    b = np.tile(a, (num / np.size(a)) + 1)[0:num]
+    b[7::8] = np.arange(np.size(b) / 8, dtype=np.uint8)
     with open(filename, "wb") as fh:
         fh.write(b.tostring())
 

@@ -98,7 +98,7 @@ class OrderWrapper:
         return f"OrderWrapper at {hex(id(self))} count={len(self)} order={self.order} base: count={len(self.np_data)}"
 
     def __len__(self):
-        return np.alen(self.order)
+        return np.size(self.order)
 
     def __and__(self, other):
         return self.np_data[self.order] & other
@@ -706,7 +706,7 @@ class DefaultSegment:
         comment_mask = self.get_style_mask(comment=True)
         has_comments = np.where(style_base & comment_bit_mask > 0)[0]
         both = np.intersect1d(comment_text_indexes, has_comments)
-        log.info("fixup comments: %d correctly marked, %d without style, %d empty text" % (np.alen(both), np.alen(comment_text_indexes) - np.alen(both), np.alen(has_comments) - np.alen(both)))
+        log.info("fixup comments: %d correctly marked, %d without style, %d empty text" % (np.size(both), np.size(comment_text_indexes) - np.size(both), np.size(has_comments) - np.size(both)))
         style_base &= comment_mask
         comment_style = self.get_style_bits(comment=True)
         style_base[comment_text_indexes] |= comment_style
@@ -780,7 +780,7 @@ class DefaultSegment:
         groups = np.split(w, np.where(np.diff(w) != 1)[0] + 1)
         ranges = []
         for group in groups:
-            if np.alen(group) > 0:
+            if np.size(group) > 0:
                 ranges.append((int(group[0]), int(group[-1]) + 1))
         return ranges
 

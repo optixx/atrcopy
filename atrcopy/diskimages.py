@@ -104,7 +104,7 @@ class DiskImageBase(Bootable):
         self.rawdata = rawdata
         self.bytes = self.rawdata.get_data()
         self.style = self.rawdata.get_style()
-        self.size = np.alen(self.bytes)
+        self.size = np.size(self.bytes)
         self.set_filename(filename)
         self.header = None
         self.total_sectors = 0
@@ -152,7 +152,7 @@ class DiskImageBase(Bootable):
         return "\n".join(lines)
 
     def setup(self):
-        self.size = np.alen(self.bytes)
+        self.size = np.size(self.bytes)
         self.read_header()
         self.header.check_size(self.size - len(self.header))
         self.check_size()
